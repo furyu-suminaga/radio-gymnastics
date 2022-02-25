@@ -1,35 +1,56 @@
 <template>
   <div class="contents">
-    <h1>会場一覧</h1>
+    <div class="flex">
+      <div class="img-wrapper">
+        <img src="kaijou_header.png" class="header-img" />
+      </div>
+      <div class="map-btn-wrapper">
+        <img
+          src="kaijou_nihonchizu.png"
+          class="map-btn"
+          @click="changePlaceToggle"
+        />
+      </div>
+    </div>
+
     <div v-if="placeToggle">
       <div class="card-position">
         <!-- TODOここはv-forを使ってキレイに書く -->
         <div class="park-card" @click="goPlay">
           <img src="park1.png" class="title-img" />
+          <div>place1</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park2.png" class="title-img" />
+          <div>place2</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park3.png" class="title-img" />
+          <div>place3</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park4.png" class="title-img" />
+          <div>place4</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park5.png" class="title-img" />
+          <div>place5</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park6.png" class="title-img" />
+          <div>place6</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park7.png" class="title-img" />
+          <div>place7</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park8.png" class="title-img" />
+          <div>place8</div>
         </div>
         <div class="park-card" @click="goPlay">
           <img src="park9.png" class="title-img" />
+          <div>place9</div>
         </div>
       </div>
     </div>
@@ -40,11 +61,12 @@
       />
     </div>
     <div class="btn-wrapper">
-      <button class="back-btn" @click="backPage">戻る</button>
-      <button class="ranking-btn" @click="goRanking">ランキング</button>
-      <button class="toggle-btn" @click="changePlaceToggle">
-        切り替えボタンどこに置こう
-      </button>
+      <div class="back-btn" @click="backPage">
+        <img src="kaijou_back.png" width="120px" height="50px" />
+      </div>
+      <div>
+        <button class="ranking-btn" @click="goRanking">ランキング</button>
+      </div>
     </div>
   </div>
 </template>
@@ -81,8 +103,26 @@ export default defineComponent({
 <style lang="scss" scoped>
 .contents {
   text-align: center;
+  background-color: yellow;
+  overflow: hidden;
+  .flex {
+    display: flex;
+  }
+  .img-wrapper {
+    text-align: left;
+    .header-img {
+      width: 250px;
+      height: 150px;
+    }
+  }
+  .map-btn {
+    width: 100px;
+    height: 50px;
+    padding-top: 90px;
+  }
+
   .card-position {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -91,17 +131,22 @@ export default defineComponent({
   .park-card {
     width: 100px;
     height: 100px;
-    background-color: red;
+    border-radius: 10px;
+    .title-img {
+      border-radius: 10px;
+    }
   }
   .btn-wrapper {
-    text-align: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    display: flex;
     .back-btn {
-      margin-top: 80px;
+      margin-top: 70px;
       width: 120px;
       height: 50px;
       border: 1px solid black;
       border-radius: 40px;
-      background-color: blue;
+      background-color: skyblue;
       color: white;
       font-size: 16px;
       font-weight: bold;
@@ -109,23 +154,13 @@ export default defineComponent({
     }
     .ranking-btn {
       margin-left: 30px;
-      margin-top: 80px;
+      margin-top: 70px;
       width: 120px;
       height: 50px;
       border: 1px solid black;
       border-radius: 40px;
-      background-color: blue;
+      background-color: skyblue;
       color: white;
-      font-size: 16px;
-      font-weight: bold;
-      letter-spacing: 0.12em;
-    }
-    .toggle-btn {
-      margin-top: 50px;
-      height: 50px;
-      border: 1px solid black;
-      border-radius: 40px;
-      background-color: yellow;
       font-size: 16px;
       font-weight: bold;
       letter-spacing: 0.12em;
