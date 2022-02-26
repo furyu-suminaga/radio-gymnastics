@@ -1,30 +1,44 @@
 <template>
   <div class="contents">
     <h1 class="title"></h1>
-    <div class="movie">
+    <div v-if="isActive" class="movie">
       <img src="~assets/Avatar.gif" class="freezeframe" />
+    </div>
+    <div v-else class="movie">
+      <img src="StillAvatar.png" class="freezeframe" />
     </div>
     <div
       class="btn"
       :class="{ playback: isActive }"
       @click="isActiveToggle"
     ></div>
-    <div v-if="endAudio" class="end-message">hoge</div>
+    <div v-if="endAudio" class="end-message">
+      <img src="taisou_popup.png" class="end-popup" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  onBeforeMount,
+  ref,
+  useRouter,
+} from '@nuxtjs/composition-api'
 import sound from '../assets/sound.mp3'
-const Freezeframe = require('freezeframe')
+// import { VueFreezeframe } from 'vue-freezeframe'
+// import Freezeframe from ''
+// const Freezeframe = require('Freezeframe')
 
 export default defineComponent({
   setup() {
-    const ff = new Freezeframe({
-      // trigger: false,
-    })
-
-    ff.stop()
+    // onBeforeMount(() => {
+    //   const ff = new VueFreezeframe({
+    //     selector: '.freezeframe',
+    //     trigger: 'click',
+    //   })
+    //   ff.stop()
+    // })
 
     const router = useRouter()
     const goPlay = () => {
@@ -36,17 +50,17 @@ export default defineComponent({
       if (isActive.value === true) {
         isActive.value = false
         audio.pause()
-        ff.stop()
+        // ff.stop()
       } else {
         isActive.value = true
         audio.play()
-        ff.start()
+        // ff.start()
       }
     }
     const pushStamp = () => {
       router.push('/place')
     }
-    const endAudio = ref<boolean>(true)
+    const endAudio = ref<boolean>(false)
     audio.addEventListener('ended', () => {
       console.log('再生終わりました')
       endAudio.value = true
@@ -59,9 +73,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .contents {
-  background-image: url("/taisou.png");
-  background-color: yellow;
-  background-size: cover;
+  background-image: url('/taisou.png');
+  background-color: #f1db5a;
+  background-size: 390px, 844px; /* 幅を0に指定 */
+  //background-size: cover;
   overflow: hidden;
   .title {
     text-align: center;
@@ -70,7 +85,9 @@ export default defineComponent({
 }
 .freezeframe {
   width: 300px;
-  height: 500px;
+  height: 650px;
+  margin-top: -30px;
+  margin-left: -10px;
 }
 .movie {
   margin: 0 auto;
@@ -112,7 +129,14 @@ export default defineComponent({
 }
 .end-message {
   position: relative;
-  left: 170px;
+  left: 10px;
   top: -300px;
+//  width: 360px;
+//  height: 574px;
+}
+.end-popup {
+  all: initial
+//  width: 360px;
+//  height: 574px;
 }
 </style>

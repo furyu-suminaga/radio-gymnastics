@@ -14,6 +14,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .container {
-  min-height: 650px;
+  min-height: 720px;
 }
 </style>
